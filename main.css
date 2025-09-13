@@ -116,8 +116,8 @@ ul li:last-child {
 }
 
 .error-message {
-  background-color: #f8d7da;
-  color: #721c24;
+  background-color: #dfcfd0;
+  color: #ac0011;
   padding: 0.75rem;
   border: 1px solid #f5c6cb;
   border-radius: 4px;

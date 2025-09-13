@@ -64,19 +64,31 @@ renderUnderAge(users, "age-filter-list", 30);
 function renderErrorsList(array, listId, errorId) {
   const listElement = document.getElementById(listId);
   const errorList = document.getElementById(errorId);
-  array.forEach((user) => {
-    if (!user.name) {
-      console.error(`User with ID ${user.id} is missing a name.`);
-      const errorItem = document.createElement("li");
-      errorItem.textContent = `User with ID ${user.id} is missing a name.`;
+  array.forEach((user, i) => {
+    if (!user || typeof user.name !== "string") {
+      const message = `Error: Item at index ${i} is missing a valid name property.`;
+      console.error(message);
+      // Display error in the error-messages div
+      const errorItem = document.createElement("div");
+      errorItem.className = "error-message";
+      errorItem.textContent = message;
       errorList.appendChild(errorItem);
-    } else {
-      const listItem = document.createElement("li");
-      listItem.textContent = user.name;
-      listElement.appendChild(listItem);
+      return;
     }
+    const listItem = document.createElement("li");
+    listItem.textContent = user.name;
+    listElement.appendChild(listItem);
   });
 }
 
-// 6. Test your error handling by creating a second array that's intentionally broken (missing name properties) and passing it to your functions. Verify that your error handling works correctly and displays errors in the div with id "broken-array-errors"
 // broken test data for exercise 6
+const brokenUsers = [
+  { id: 1, age: 23 }, // Missing name property
+  { id: 2, name: "Darth Vader", age: 45 },
+  { id: 3, age: 23 }, // Missing name property
+  { id: 4, name: "Obi-Wan Kenobi", age: 57 },
+];
+
+
+// 6. Test your error handling by creating a second array that's intentionally broken (missing name properties) and passing it to your functions. Verify that your error handling works correctly and displays errors in the div with id "broken-array-errors"
+renderErrorsList(brokenUsers, "broken-array-list", "broken-array-errors");
