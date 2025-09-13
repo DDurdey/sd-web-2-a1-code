@@ -30,20 +30,53 @@ users
   .forEach((user) => {
     console.log(user.name);
     const listItem = document.createElement("li");
-    li.textContent = user.name;
+    listItem.textContent = user.name;
     youngList.appendChild(listItem);
   });
 
-
-
-// broken test data for exercise 6
-
-
-
 // 3. Create a reusable function that takes any array and uses logic to render a list of character names in the HTML. Use this function to populate the list with id "function-list"
+function renderCharacterNames(array, listId) {
+  const functionList = document.getElementById(listId);
+  array.forEach((user) => {
+    const listItem = document.createElement("li");
+    listItem.textContent = user.name;
+    functionList.appendChild(listItem);
+  });
+}
+
+renderCharacterNames(users, "function-list");
 
 // 4. Create a function that takes an array and an age threshold parameter. The function should only display characters whose age is below the given number. Render results in the list with id "age-filter-list"
+function renderUnderAge(array, listId, ageMaximum) {
+  const ageFilterList = document.getElementById(listId);
+  array.forEach((user) => {
+    if (user.age < ageMaximum) {
+      const listItem = document.createElement("li");
+      listItem.textContent = user.name;
+      ageFilterList.appendChild(listItem);
+    }
+  });
+}
+
+renderUnderAge(users, "age-filter-list", 30);
 
 // 5. Add error handling to your functions that will log an error message using console.error() if any object doesn't have a "name" property. Display any error messages in the div with id "error-messages"
+function renderErrorsList(array, listId, errorId) {
+  const listElement = document.getElementById(listId);
+  const errorList = document.getElementById(errorId);
+  array.forEach((user) => {
+    if (!user.name) {
+      console.error(`User with ID ${user.id} is missing a name.`);
+      const errorItem = document.createElement("li");
+      errorItem.textContent = `User with ID ${user.id} is missing a name.`;
+      errorList.appendChild(errorItem);
+    } else {
+      const listItem = document.createElement("li");
+      listItem.textContent = user.name;
+      listElement.appendChild(listItem);
+    }
+  });
+}
 
 // 6. Test your error handling by creating a second array that's intentionally broken (missing name properties) and passing it to your functions. Verify that your error handling works correctly and displays errors in the div with id "broken-array-errors"
+// broken test data for exercise 6
