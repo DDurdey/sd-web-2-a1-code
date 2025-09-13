@@ -68,7 +68,6 @@ function renderErrorsList(array, listId, errorId) {
     if (!user || typeof user.name !== "string") {
       const message = `Error: Item at index ${i} is missing a valid name property.`;
       console.error(message);
-      // Display error in the error-messages div
       const errorItem = document.createElement("div");
       errorItem.className = "error-message";
       errorItem.textContent = message;
