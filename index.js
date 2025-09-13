@@ -81,6 +81,8 @@ function renderErrorsList(array, listId, errorId) {
   });
 }
 
+renderErrorsList(users, "error-handling-list", "error-messages");
+
 // broken test data for exercise 6
 const brokenUsers = [
   { id: 1, age: 23 }, // Missing name property
